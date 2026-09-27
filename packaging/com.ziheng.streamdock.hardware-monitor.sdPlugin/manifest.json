@@ -1,0 +1,96 @@
+{
+  "Actions": [
+    {
+      "UUID": "com.ziheng.streamdock.hardware-monitor.cpu",
+      "Icon": "images/cpu-action.svg",
+      "Name": "CPU Load",
+      "Tooltip": "Show total CPU utilization",
+      "States": [
+        { "Image": "images/cpu-normal.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/cpu-warning.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/cpu-critical.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/cpu-unavailable.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" }
+      ],
+      "Controllers": ["Information", "Keypad"],
+      "SupportedInMultiActions": false,
+      "VisibleInActionsList": true,
+      "UserTitleEnabled": false
+    },
+    {
+      "UUID": "com.ziheng.streamdock.hardware-monitor.memory",
+      "Icon": "images/memory-action.svg",
+      "Name": "Memory Usage",
+      "Tooltip": "Show physical memory utilization",
+      "States": [
+        { "Image": "images/memory-normal.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/memory-warning.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/memory-critical.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/memory-unavailable.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" }
+      ],
+      "Controllers": ["Information", "Keypad"],
+      "SupportedInMultiActions": false,
+      "VisibleInActionsList": true,
+      "UserTitleEnabled": false
+    },
+    {
+      "UUID": "com.ziheng.streamdock.hardware-monitor.gpu-load",
+      "Icon": "images/gpu-action.svg",
+      "Name": "GPU Load",
+      "Tooltip": "Show NVIDIA GPU utilization",
+      "States": [
+        { "Image": "images/gpu-normal.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/gpu-warning.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/gpu-critical.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/gpu-unavailable.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" }
+      ],
+      "Controllers": ["Information", "Keypad"],
+      "SupportedInMultiActions": false,
+      "VisibleInActionsList": true,
+      "UserTitleEnabled": false
+    },
+    {
+      "UUID": "com.ziheng.streamdock.hardware-monitor.gpu-temperature",
+      "Icon": "images/temperature-action.svg",
+      "Name": "GPU Temperature",
+      "Tooltip": "Show NVIDIA GPU core temperature",
+      "States": [
+        { "Image": "images/temperature-normal.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/temperature-warning.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/temperature-critical.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/temperature-unavailable.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" }
+      ],
+      "Controllers": ["Information", "Keypad"],
+      "SupportedInMultiActions": false,
+      "VisibleInActionsList": true,
+      "UserTitleEnabled": false
+    },
+    {
+      "UUID": "com.ziheng.streamdock.hardware-monitor.vram",
+      "Icon": "images/vram-action.svg",
+      "Name": "VRAM Usage",
+      "Tooltip": "Show NVIDIA framebuffer memory utilization",
+      "States": [
+        { "Image": "images/vram-normal.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/vram-warning.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/vram-critical.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/vram-unavailable.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" }
+      ],
+      "Controllers": ["Information", "Keypad"],
+      "SupportedInMultiActions": false,
+      "VisibleInActionsList": true,
+      "UserTitleEnabled": false
+    }
+  ],
+  "Version": "0.1.0",
+  "Name": "Hardware Monitor",
+  "Icon": "images/plugin.svg",
+  "CategoryIcon": "images/plugin-action.svg",
+  "Category": "System",
+  "Description": "Compact local CPU, memory, and NVIDIA GPU telemetry.",
+  "CodePath": "StreamDockHardwareMonitor-v0.1.0.exe",
+  "CodePathWin": "StreamDockHardwareMonitor-v0.1.0.exe",
+  "SDKVersion": 1,
+  "Author": "Ziheng Shi",
+  "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
+  "Software": { "MinimumVersion": "3.10.188.226" }
+}

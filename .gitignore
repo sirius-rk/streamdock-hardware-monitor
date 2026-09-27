@@ -1,0 +1,6 @@
+**/bin/
+**/obj/
+staging/
+.vs/
+*.user
+*.suo
