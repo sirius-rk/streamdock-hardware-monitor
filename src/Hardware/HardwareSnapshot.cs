@@ -5,6 +5,7 @@ public sealed record HardwareSnapshot(
     double? MemoryUsagePercent,
     double? GpuLoadPercent,
     double? GpuTemperatureCelsius,
+    double? VramTemperatureCelsius,
     double? VramUsagePercent)
 {
     public double? Get(MetricKind metric) => metric switch
@@ -13,6 +14,7 @@ public sealed record HardwareSnapshot(
         MetricKind.MemoryUsage => MemoryUsagePercent,
         MetricKind.GpuLoad => GpuLoadPercent,
         MetricKind.GpuTemperature => GpuTemperatureCelsius,
+        MetricKind.VramTemperature => VramTemperatureCelsius,
         MetricKind.VramUsage => VramUsagePercent,
         _ => null
     };
@@ -21,4 +23,5 @@ public sealed record HardwareSnapshot(
 public sealed record NvidiaGpuReading(
     double GpuLoadPercent,
     double TemperatureCelsius,
+    double? VramTemperatureCelsius,
     double VramUsagePercent);

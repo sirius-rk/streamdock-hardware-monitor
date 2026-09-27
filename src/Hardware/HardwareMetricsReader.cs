@@ -1,6 +1,6 @@
 namespace StreamDockHardwareMonitor.Hardware;
 
-public sealed class HardwareMetricsReader
+public sealed class HardwareMetricsReader : IDisposable
 {
     private readonly WindowsSystemMetricsReader _systemReader = new();
     private readonly NvidiaSmiReader _nvidiaReader = new();
@@ -16,6 +16,9 @@ public sealed class HardwareMetricsReader
             memory,
             gpu?.GpuLoadPercent,
             gpu?.TemperatureCelsius,
+            gpu?.VramTemperatureCelsius,
             gpu?.VramUsagePercent);
     }
+
+    public void Dispose() => _nvidiaReader.Dispose();
 }

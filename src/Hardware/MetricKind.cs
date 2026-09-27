@@ -6,6 +6,7 @@ public enum MetricKind
     MemoryUsage,
     GpuLoad,
     GpuTemperature,
+    VramTemperature,
     VramUsage
 }
 
@@ -17,6 +18,7 @@ public sealed record ActionDefinition(string Uuid, string Name, MetricKind Metri
         new("com.ziheng.streamdock.hardware-monitor.memory", "Memory Usage", MetricKind.MemoryUsage),
         new("com.ziheng.streamdock.hardware-monitor.gpu-load", "GPU Load", MetricKind.GpuLoad),
         new("com.ziheng.streamdock.hardware-monitor.gpu-temperature", "GPU Temperature", MetricKind.GpuTemperature),
+        new("com.ziheng.streamdock.hardware-monitor.vram-temperature", "VRAM Temperature", MetricKind.VramTemperature),
         new("com.ziheng.streamdock.hardware-monitor.vram", "VRAM Usage", MetricKind.VramUsage)
     ];
 

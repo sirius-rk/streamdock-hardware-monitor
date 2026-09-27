@@ -4,7 +4,7 @@ using StreamDockHardwareMonitor.Plugin;
 
 if (args.Length == 1 && string.Equals(args[0], "--probe", StringComparison.OrdinalIgnoreCase))
 {
-    var reader = new HardwareMetricsReader();
+    using var reader = new HardwareMetricsReader();
     _ = reader.Capture();
     await Task.Delay(TimeSpan.FromSeconds(1));
     var snapshot = reader.Capture();

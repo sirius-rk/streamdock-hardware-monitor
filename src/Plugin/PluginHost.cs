@@ -122,6 +122,7 @@ internal sealed class StreamDockPlugin : IAsyncDisposable
     {
         _lifetime.Cancel();
         _socket.Dispose();
+        _reader.Dispose();
         _refreshGate.Dispose();
         _sendGate.Dispose();
         _lifetime.Dispose();
@@ -244,6 +245,15 @@ internal sealed class StreamDockPlugin : IAsyncDisposable
         CancellationToken cancellationToken)
     {
         var state = (int)MetricPresentation.GetState(metric, value);
+        var image = MetricIconRenderer.RenderDataUri(metric, value);
+        await SendAsync(
+            new
+            {
+                @event = "setImage",
+                context,
+                payload = new { image, target = 0, state }
+            },
+            cancellationToken);
         await SendAsync(
             new { @event = "setState", context, payload = new { state } },
             cancellationToken);

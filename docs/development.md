@@ -10,7 +10,7 @@
 
 - `src/Hardware/`: Windows CPU/memory counters and the NVIDIA query client.
 - `src/Plugin/`: Stream Dock WebSocket lifecycle and action-context updates.
-- `tests/`: dependency-free deterministic tests for formatting, thresholds, and `nvidia-smi` parsing.
+- `tests/`: dependency-free deterministic tests for formatting, thresholds, `nvidia-smi` parsing, and dynamic SVG gauges.
 - `packaging/com.ziheng.streamdock.hardware-monitor.sdPlugin/`: manifest and state artwork.
 - `scripts/package.ps1`: self-contained release build and staging.
 

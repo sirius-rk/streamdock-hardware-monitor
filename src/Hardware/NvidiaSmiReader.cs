@@ -4,8 +4,10 @@ using System.Globalization;
 namespace StreamDockHardwareMonitor.Hardware;
 
 public sealed class NvidiaSmiReader
+    : IDisposable
 {
     private const int ProcessTimeoutMilliseconds = 2_000;
+    private readonly NvidiaNvApiMemoryTemperatureReader _nvApiReader = new();
     public NvidiaGpuReading? Read()
     {
         var executable = FindExecutable();
@@ -27,7 +29,7 @@ public sealed class NvidiaSmiReader
                     RedirectStandardError = true
                 }
             };
-            process.StartInfo.ArgumentList.Add("--query-gpu=utilization.gpu,temperature.gpu,memory.used,memory.total");
+            process.StartInfo.ArgumentList.Add("--query-gpu=utilization.gpu,temperature.gpu,temperature.memory,memory.used,memory.total");
             process.StartInfo.ArgumentList.Add("--format=csv,noheader,nounits");
 
             if (!process.Start())
@@ -50,7 +52,14 @@ public sealed class NvidiaSmiReader
                 return null;
             }
 
-            return TryParseOutput(outputTask.Result, out var reading) ? reading : null;
+            if (!TryParseOutput(outputTask.Result, out var reading))
+            {
+                return null;
+            }
+
+            return reading.VramTemperatureCelsius is null
+                ? reading with { VramTemperatureCelsius = _nvApiReader.ReadMemoryTemperature() }
+                : reading;
         }
         catch (Exception exception) when (
             exception is InvalidOperationException
@@ -58,7 +67,8 @@ public sealed class NvidiaSmiReader
                 or System.ComponentModel.Win32Exception
                 or IOException
                 or UnauthorizedAccessException
-                or TimeoutException)
+                or TimeoutException
+                or System.Runtime.InteropServices.ExternalException)
         {
             return null;
         }
@@ -70,11 +80,11 @@ public sealed class NvidiaSmiReader
         foreach (var line in output.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries))
         {
             var columns = line.Split(',');
-            if (columns.Length < 4
+            if (columns.Length < 5
                 || !TryParseNumber(columns[0], out var gpuLoad)
                 || !TryParseNumber(columns[1], out var temperature)
-                || !TryParseNumber(columns[2], out var usedMemoryMiB)
-                || !TryParseNumber(columns[3], out var totalMemoryMiB)
+                || !TryParseNumber(columns[3], out var usedMemoryMiB)
+                || !TryParseNumber(columns[4], out var totalMemoryMiB)
                 || totalMemoryMiB <= 0
                 || usedMemoryMiB < 0
                 || usedMemoryMiB > totalMemoryMiB)
@@ -82,9 +92,14 @@ public sealed class NvidiaSmiReader
                 continue;
             }
 
+            double? memoryTemperature = TryParseNumber(columns[2], out var parsedMemoryTemperature)
+                && parsedMemoryTemperature is >= 0 and <= 150
+                    ? parsedMemoryTemperature
+                    : null;
             reading = new NvidiaGpuReading(
                 Math.Clamp(gpuLoad, 0d, 100d),
                 Math.Max(0d, temperature),
+                memoryTemperature,
                 Math.Clamp(usedMemoryMiB * 100d / totalMemoryMiB, 0d, 100d));
             return true;
         }
@@ -121,4 +136,6 @@ public sealed class NvidiaSmiReader
     private static bool TryParseNumber(string text, out double value) =>
         double.TryParse(text.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out value)
         && double.IsFinite(value);
+
+    public void Dispose() => _nvApiReader.Dispose();
 }

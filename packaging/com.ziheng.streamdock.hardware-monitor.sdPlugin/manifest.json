@@ -65,6 +65,22 @@
       "UserTitleEnabled": false
     },
     {
+      "UUID": "com.ziheng.streamdock.hardware-monitor.vram-temperature",
+      "Icon": "images/temperature-action.svg",
+      "Name": "VRAM Temperature",
+      "Tooltip": "Show NVIDIA GPU memory temperature when the sensor is exposed by the driver",
+      "States": [
+        { "Image": "images/vram-temperature-normal.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/vram-temperature-warning.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/vram-temperature-critical.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" },
+        { "Image": "images/vram-temperature-unavailable.svg", "ShowTitle": true, "TitleAlignment": "bottom", "TitleColor": "white", "FontSize": "8", "FontStyle": "Bold" }
+      ],
+      "Controllers": ["Information", "Keypad"],
+      "SupportedInMultiActions": false,
+      "VisibleInActionsList": true,
+      "UserTitleEnabled": false
+    },
+    {
       "UUID": "com.ziheng.streamdock.hardware-monitor.vram",
       "Icon": "images/vram-action.svg",
       "Name": "VRAM Usage",
@@ -81,14 +97,14 @@
       "UserTitleEnabled": false
     }
   ],
-  "Version": "0.1.0",
+  "Version": "0.2.0",
   "Name": "Hardware Monitor",
   "Icon": "images/plugin.svg",
   "CategoryIcon": "images/plugin-action.svg",
   "Category": "System",
   "Description": "Compact local CPU, memory, and NVIDIA GPU telemetry.",
-  "CodePath": "StreamDockHardwareMonitor-v0.1.0.exe",
-  "CodePathWin": "StreamDockHardwareMonitor-v0.1.0.exe",
+  "CodePath": "StreamDockHardwareMonitor-v0.2.0.exe",
+  "CodePathWin": "StreamDockHardwareMonitor-v0.2.0.exe",
   "SDKVersion": 1,
   "Author": "Ziheng Shi",
   "OS": [{ "Platform": "windows", "MinimumVersion": "10" }],
